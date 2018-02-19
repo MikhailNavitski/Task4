@@ -1,0 +1,90 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<schema xmlns="http://www.w3.org/2001/XMLSchema"
+        targetNamespace="http://www.example.com/web"
+        xmlns:tns="http://www.example.com/web"
+        elementFormDefault="qualified">
+    <element name="web-app">
+        <complexType>
+            <choice maxOccurs="unbounded">
+                <element name="display-name" type="string"/>
+                <element name="welcome-file-list" type="tns:Welcome"/>
+                <element name="filter" type="tns:Filter"/>
+                <element name="filter-mapping" type="tns:Filter-Mapping"/>
+                <element name="listener" type="tns:Listener"/>
+                <element name="servlet" type="tns:Servlet"/>
+                <element name="servlet-mapping" type="tns:Servlet-mapping"/>
+                <element name="error-page" type="tns:Error"/>
+            </choice>
+            <attribute name="id">
+                <simpleType>
+                    <restriction base="string">
+                        <pattern value="webApp_9"/>
+                    </restriction>
+                </simpleType>
+            </attribute>
+            <attribute name="version">
+                <simpleType>
+                    <restriction base="int">
+                        <pattern value="024"/>
+                    </restriction>
+                </simpleType>
+            </attribute>
+        </complexType>
+    </element>
+    <complexType name="Welcome">
+        <sequence>
+            <element name="welcome-file" type="string" maxOccurs="unbounded"/>
+        </sequence>
+    </complexType>
+    <complexType name="Filter">
+        <sequence>
+            <element name="filter-name" type="string" maxOccurs="unbounded"/>
+            <element name="filter-class" type="string" maxOccurs="unbounded"/>
+            <element name="init-param" type="tns:Init" maxOccurs="unbounded"/>
+        </sequence>
+    </complexType>
+    <complexType name="Init">
+        <sequence>
+            <element name="param-name" type="string" maxOccurs="unbounded"/>
+            <element name="param-value" type="string" maxOccurs="unbounded"/>
+        </sequence>
+    </complexType>
+    <complexType name="Filter-Mapping">
+        <sequence>
+            <element name="filter-name" type="string" maxOccurs="unbounded"/>
+            <element name="url-pattern" type="string" maxOccurs="unbounded"/>
+            <element name="dispatcher" type="string" maxOccurs="unbounded"/>
+        </sequence>
+    </complexType>
+    <complexType name="Listener">
+        <sequence>
+            <element name="listener-class" type="string"/>
+        </sequence>
+    </complexType>
+    <complexType name="Servlet">
+        <choice>
+            <sequence>
+                <element name="servlet-name" type="string" maxOccurs="unbounded"/>
+                <element name="servlet-class" type="string" maxOccurs="unbounded"/>
+            </sequence>
+            <choice>
+                <element name="init-param" type="tns:Init" maxOccurs="unbounded"/>
+            </choice>
+        </choice>
+    </complexType>
+    <complexType name="Servlet-mapping">
+        <sequence>
+            <element name="servlet-name" type="string" maxOccurs="unbounded"/>
+            <element name="url-pattern" type="string" maxOccurs="unbounded"/>
+        </sequence>
+    </complexType>
+    <complexType name="Error">
+        <sequence>
+            <choice>
+                <element name="error-code" type="int" maxOccurs="unbounded"/>
+                <element name="exception-type" type="string" maxOccurs="unbounded"/>
+            </choice>
+            <element name="location" type="string" maxOccurs="unbounded"/>
+        </sequence>
+    </complexType>
+</schema>
